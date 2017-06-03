@@ -9,8 +9,6 @@ namespace MemoryAnalyzer
 {
     public class FileSystemWalker
     {
-        private readonly ObservableCollection<Node> _root;
-        private readonly SynchronizationContext _uiContext;
         private readonly Thread _walkerThread;
 
         private readonly Action<Node, Node> _addNodeFunc;
@@ -19,12 +17,11 @@ namespace MemoryAnalyzer
 
         public FileSystemWalker(ObservableCollection<Node> root, SynchronizationContext uiContext)
         {
-            _root = root;
-            _uiContext = uiContext;
+            var uiContext1 = uiContext;
             _walkerThread = new Thread(WalkMemory);
 
-            _addNodeFunc = (parent, child) => _uiContext.Send(state => parent.Children.Add(child), null);
-            _addDriveFunc = (drive) => _uiContext.Send(state => _root.Add(drive), null);
+            _addNodeFunc = (parent, child) => uiContext1.Send(state => parent.Children.Add(child), null);
+            _addDriveFunc = (drive) => uiContext1.Send(state => root.Add(drive), null);
 
             _queuedNodes = new Stack<Node>();
         }

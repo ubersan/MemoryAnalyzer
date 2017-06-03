@@ -34,10 +34,11 @@ namespace MemoryAnalyzer
         }
 
         public string Name { get; set; }
-        public DirectoryInfo FileInfo { get; set; }
+        public DirectoryInfo FileInfo { get; protected set; }
         public ObservableCollection<Node> Children { get; set; }
         public CompletionStatus CompletionState { get; set; }
         public Node Parent { get; protected set; }
+        // TODO: Size not updating after treeitem opening. Probably missing a PropertyChanged
         public long Size { get; set; }
     }
 }

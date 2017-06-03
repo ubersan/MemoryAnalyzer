@@ -15,9 +15,10 @@ namespace MemoryAnalyzer
             {
                 var par = node.Parent;
                 if (par == null)
-                {// size into xaml as text block
+                {
                     break;
                 }
+
                 par.CompletionState.DecreaseActiveChildCounter();
                 par.Size += node.Size;
                 if (par.CompletionState.ActiveChildCounter == 0)

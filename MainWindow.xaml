@@ -26,6 +26,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="{Binding Name}"/>
@@ -34,6 +35,8 @@
                         <TextBlock Grid.Column="2" Text="{Binding CompletionState.ProcessedChildrenRatio}" Visibility="{Binding CompletionState.IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                         <TextBlock Grid.Column="2" Text="IsQueued" Visibility="{Binding CompletionState.IsQueued, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                         <TextBlock Grid.Column="3" Text="%" Visibility="{Binding CompletionState.IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <TextBlock Grid.Column="3" Text=" Size: " Visibility="{Binding CompletionState.IsCompleted, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <TextBlock Grid.Column="4" Text="{Binding Size}" Visibility="{Binding CompletionState.IsCompleted, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                     </Grid>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
