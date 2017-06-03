@@ -5,8 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MemoryAnalyzer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        d:DataContext="{d:DesignInstance local:ViewModel, IsDesignTimeCreatable=True}"
+        Title="MainWindow" Height="650" Width="525"
+        Closing="MainWindow_OnClosing">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
     <Grid>
-        
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+        <TreeView Grid.Row="0" ItemsSource="{Binding Root}">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="{Binding Name}"/>
+                        <TextBlock Grid.Column="1" Text=" Process: " Visibility="{Binding CompletionState.IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <TextBlock Grid.Column="2" Text="IsCompleted" Visibility="{Binding CompletionState.IsCompleted, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <TextBlock Grid.Column="2" Text="{Binding CompletionState.ProcessedChildrenRatio}" Visibility="{Binding CompletionState.IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <TextBlock Grid.Column="2" Text="IsQueued" Visibility="{Binding CompletionState.IsQueued, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <TextBlock Grid.Column="3" Text="%" Visibility="{Binding CompletionState.IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                    </Grid>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+
     </Grid>
 </Window>
