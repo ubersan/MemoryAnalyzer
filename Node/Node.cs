@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 
 namespace MemoryAnalyzer
 {
-    public class Node
+    public class Node : INotifyPropertyChanged
     {
         public IEnumerable<DirectoryInfo> GetDirectories()
         {
@@ -33,12 +34,18 @@ namespace MemoryAnalyzer
             }
         }
 
+        public void AddToSize(long size)
+        {
+            Size += size;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Size)));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
         public string Name { get; set; }
         public DirectoryInfo FileInfo { get; protected set; }
         public ObservableCollection<Node> Children { get; set; }
         public CompletionStatus CompletionState { get; set; }
         public Node Parent { get; protected set; }
-        // TODO: Size not updating after treeitem opening. Probably missing a PropertyChanged
         public long Size { get; set; }
     }
 }

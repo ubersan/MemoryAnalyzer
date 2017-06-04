@@ -20,7 +20,7 @@ namespace MemoryAnalyzer
                 }
 
                 par.CompletionState.DecreaseActiveChildCounter();
-                par.Size += node.Size;
+                par.AddToSize(node.Size);
                 if (par.CompletionState.ActiveChildCounter == 0)
                 {
                     par.CompletionState.SetIsCompleted();

@@ -76,6 +76,6 @@ namespace MemoryAnalyzer
 
         public int ProcessedChildrenRatio => !_totalActiveChildCounterWasSet || TotalActiveChildCounter == 0
             ? 0
-            : (int)(100 * (TotalActiveChildCounter - ActiveChildCounter) / (double)TotalActiveChildCounter);
+            : (int) (100 * (TotalActiveChildCounter - ActiveChildCounter) / (double) TotalActiveChildCounter);
     }
 }
