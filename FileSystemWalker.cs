@@ -12,8 +12,8 @@ namespace MemoryAnalyzer
         private readonly Thread _walkerThread;
 
         private readonly Action<Node, Node> _addNodeFunc;
-        private readonly Stack<Node> _queuedNodes;
         private readonly Action<DriveNode> _addDriveFunc;
+        private readonly Stack<Node> _queuedNodes;
 
         public FileSystemWalker(ObservableCollection<Node> root, SynchronizationContext uiContext)
         {
@@ -51,13 +51,11 @@ namespace MemoryAnalyzer
 
                     if (!hasFiles && !hasDirectories)
                     {
-                        node.CompletionState.SetIsCompleted();
                         node.NotifyParentAboutCompletion();
                     }
                 }
                 else
                 {
-                    node.CompletionState.SetIsCompleted();
                     node.NotifyParentAboutCompletion();
                 }
 

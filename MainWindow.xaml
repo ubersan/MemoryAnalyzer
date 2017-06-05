@@ -37,12 +37,12 @@
 
                         <TextBlock Grid.Column="0" Text="{Binding Name}"/>
                         <TextBlock Grid.Column="1" Text=" Process: " Visibility="{Binding CompletionState.IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                        <TextBlock Grid.Column="2" Text="IsCompleted" Visibility="{Binding CompletionState.IsCompleted, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <TextBlock Grid.Column="2" Text="HasCompleted" Visibility="{Binding CompletionState.HasCompleted, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                         <TextBlock Grid.Column="2" Text="{Binding CompletionState.ProcessedChildrenRatio}" Visibility="{Binding CompletionState.IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                         <TextBlock Grid.Column="2" Text="IsQueued" Visibility="{Binding CompletionState.IsQueued, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                         <TextBlock Grid.Column="3" Text="%" Visibility="{Binding CompletionState.IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                        <TextBlock Grid.Column="3" Text=" Size: " Visibility="{Binding CompletionState.IsCompleted, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                        <TextBlock Grid.Column="4" Text="{Binding Size}" Visibility="{Binding CompletionState.IsCompleted, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <TextBlock Grid.Column="3" Text=" Size: " Visibility="{Binding CompletionState.HasCompleted, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <TextBlock Grid.Column="4" Text="{Binding Size}" Visibility="{Binding CompletionState.HasCompleted, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                     </Grid>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
@@ -51,10 +51,11 @@
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
             <TextBlock Text="Biggest File"/>
-            <TextBlock Text="{Binding BiggestFile}"/>
+            <TextBlock Grid.Row="1" Text="{Binding BiggestFile}"/>
         </Grid>
     </Grid>
 </Window>

@@ -11,15 +11,15 @@ namespace MemoryAnalyzer
             ActiveChildCounter = 0;
             TotalActiveChildCounter = 1;
 
-            IsCompleted = false;
+            HasCompleted = false;
             IsRunning = false;
             IsQueued = true;
             UpdateAllCompletionPropertyChanged();
         }
 
-        public void SetIsCompleted()
+        public void SetHasCompleted()
         {
-            IsCompleted = true;
+            HasCompleted = true;
             IsRunning = false;
             IsQueued = false;
             UpdateAllCompletionPropertyChanged();
@@ -27,7 +27,7 @@ namespace MemoryAnalyzer
 
         public void SetIsRunning()
         {
-            IsCompleted = false;
+            HasCompleted = false;
             IsRunning = true;
             IsQueued = false;
             UpdateAllCompletionPropertyChanged();
@@ -56,7 +56,7 @@ namespace MemoryAnalyzer
 
         private void UpdateAllCompletionPropertyChanged()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsCompleted)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HasCompleted)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsRunning)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsQueued)));
         }
@@ -68,7 +68,7 @@ namespace MemoryAnalyzer
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public bool IsCompleted { get; private set; }
+        public bool HasCompleted { get; private set; }
         public bool IsRunning { get; private set; }
         public bool IsQueued { get; private set; }
         public int ActiveChildCounter { get; private set; }

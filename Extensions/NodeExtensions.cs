@@ -11,6 +11,8 @@ namespace MemoryAnalyzer
 
         public static void NotifyParentAboutCompletion(this Node node)
         {
+            node.CompletionState.SetHasCompleted();
+
             while (true)
             {
                 var par = node.Parent;
@@ -23,7 +25,7 @@ namespace MemoryAnalyzer
                 par.AddToSize(node.Size);
                 if (par.CompletionState.ActiveChildCounter == 0)
                 {
-                    par.CompletionState.SetIsCompleted();
+                    par.CompletionState.SetHasCompleted();
                     node = par;
                     continue;
                 }

@@ -40,6 +40,11 @@ namespace MemoryAnalyzer
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Size)));
         }
 
+        public void HasCompleted()
+        {
+            this.NotifyParentAboutCompletion();
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public string Name { get; set; }
         public DirectoryInfo FileInfo { get; protected set; }
