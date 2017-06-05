@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MemoryAnalyzer"
-        xmlns:commands="clr-namespace:MemoryAnalyzer.Commands"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance local:ViewModel, IsDesignTimeCreatable=True}"
         Title="MainWindow" Height="600" Width="1060"
@@ -13,7 +12,7 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
     <Window.InputBindings>
-        <KeyBinding Key="Escape" Command="{x:Static commands:CloseWindowCommand.Instance}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
+        <KeyBinding Key="Escape" Command="{x:Static local:CloseWindowCommand.Instance}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
     </Window.InputBindings>
     
     <Grid>
@@ -52,10 +51,25 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
-            <TextBlock Text="Biggest File"/>
-            <TextBlock Grid.Row="1" Text="{Binding BiggestFile}"/>
+            <StackPanel Grid.Row="0">
+                <TextBlock Text="Biggest File"/>
+                <TextBlock Text="{Binding FileSystemWalker.Statistics.FileStatistics.BiggestNode.FileInfo.FullName}"/>
+                <TextBlock Text="{Binding FileSystemWalker.Statistics.FileStatistics.BiggestNode.Size}"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="1">
+                <TextBlock Text="Smallest File"/>
+                <TextBlock Text="{Binding FileSystemWalker.Statistics.FileStatistics.SmallestNode.FileInfo.FullName}"/>
+                <TextBlock Text="{Binding FileSystemWalker.Statistics.FileStatistics.SmallestNode.Size}"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="2">
+                <TextBlock Text="Average File Size"/>
+                <TextBlock Text="{Binding FileSystemWalker.Statistics.FileStatistics.AverageSize}"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

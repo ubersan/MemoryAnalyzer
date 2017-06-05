@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace MemoryAnalyzer.Commands
+namespace MemoryAnalyzer
 {
     public class CloseWindowCommand : ICommand
     {

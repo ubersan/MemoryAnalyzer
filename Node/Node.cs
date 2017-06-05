@@ -6,7 +6,7 @@ using System.IO;
 
 namespace MemoryAnalyzer
 {
-    public class Node : INotifyPropertyChanged
+    public abstract class Node : INotifyPropertyChanged
     {
         public IEnumerable<DirectoryInfo> GetDirectories()
         {
@@ -40,9 +40,10 @@ namespace MemoryAnalyzer
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Size)));
         }
 
-        public void HasCompleted()
+        public void HasCompleted(Statistics statistics)
         {
             this.NotifyParentAboutCompletion();
+            statistics.Process((dynamic)this);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

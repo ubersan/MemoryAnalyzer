@@ -51,12 +51,12 @@ namespace MemoryAnalyzer
 
                     if (!hasFiles && !hasDirectories)
                     {
-                        node.NotifyParentAboutCompletion();
+                        node.HasCompleted(Statistics);
                     }
                 }
                 else
                 {
-                    node.NotifyParentAboutCompletion();
+                    node.HasCompleted(Statistics);
                 }
 
                 node.CompletionState.SetTotalActiveChildCounter();
@@ -76,5 +76,7 @@ namespace MemoryAnalyzer
                 throw new ThreadStateException("Aborting Walkerthread timed out");
             }
         }
+
+        public Statistics Statistics { get; } = new Statistics();
     }
 }
