@@ -24,7 +24,12 @@ namespace MemoryAnalyzer.Commands
             }
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { throw new NotSupportedException(); }
+            remove { }
+        }
+
         public static readonly ICommand Instance = new CloseWindowCommand();
     }
 }
