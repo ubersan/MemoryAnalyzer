@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 
+// TODO: Idea: Give each node a statistics object. when clicked on a node, show its statistical details on the right hand side.
+
 namespace MemoryAnalyzer
 {
     public abstract class Node : INotifyPropertyChanged
