@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Shapes;
+using System.Windows.Controls;
 
 namespace MemoryAnalyzer
 {
@@ -17,6 +16,13 @@ namespace MemoryAnalyzer
         private void MainWindow_OnClosing(object sender, CancelEventArgs e)
         {
             ((ViewModel) DataContext).FileSystemWalker.Stop();
+        }
+
+        // TODO: Can this be somewhere else?
+        private void TreeView_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            var tv = (TreeView) e.OriginalSource;
+            ((ViewModel) DataContext).SelectedNode = ((Node) e.NewValue);
         }
     }
 }

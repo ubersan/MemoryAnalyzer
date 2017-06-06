@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace MemoryAnalyzer
 {
@@ -24,12 +23,14 @@ namespace MemoryAnalyzer
 
         public void Process(DirectoryNode directoryNode)
         {
+            // TODO: Hier muss ein merge geschehen, mit allen  Files von allen children
             DirectoryStatistics.Add(directoryNode);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DirectoryStatistics)));
         }
 
         public void Process(DriveNode driveNode)
         {
+            // TODO: Hier muss ein merge geschehen, mit allen  Files von allen children
             DriveStatistics.Add(driveNode);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DriveStatistics)));
         }

@@ -4,8 +4,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 
-// TODO: Idea: Give each node a statistics object. when clicked on a node, show its statistical details on the right hand side.
-
 namespace MemoryAnalyzer
 {
     public abstract class Node : INotifyPropertyChanged
@@ -42,10 +40,15 @@ namespace MemoryAnalyzer
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Size)));
         }
 
-        public void HasCompleted(Statistics statistics)
+        public void HasCompleted()
         {
+            AddNodeToStatistics(this);
             this.NotifyParentAboutCompletion();
-            statistics.Process((dynamic)this);
+        }
+
+        public void AddNodeToStatistics(Node node)
+        {
+            Statistics.Process((dynamic)node);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -55,5 +58,6 @@ namespace MemoryAnalyzer
         public CompletionStatus CompletionState { get; set; }
         public Node Parent { get; protected set; }
         public long Size { get; set; }
+        public Statistics Statistics { get; } = new Statistics();
     }
 }

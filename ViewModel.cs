@@ -6,6 +6,7 @@ namespace MemoryAnalyzer
     public class ViewModel : ViewModelBase
     {
         private ObservableCollection<Node> _root;
+        private Node _selectedNode;
 
         public ViewModel()
         {
@@ -21,7 +22,10 @@ namespace MemoryAnalyzer
             get { return _root; }
             set
             {
-                if (_root == value) return;
+                if (_root == value)
+                {
+                    return;
+                }
 
                 _root = value;
                 RaisePropertyChanged();
@@ -29,5 +33,20 @@ namespace MemoryAnalyzer
         }
 
         public FileSystemWalker FileSystemWalker { get; }
+
+        public Node SelectedNode
+        {
+            get { return _selectedNode; }
+            set
+            {
+                if (ReferenceEquals(_selectedNode, value))
+                {
+                    return;
+                }
+
+                _selectedNode = value;
+                RaisePropertyChanged();
+            }
+        }
     }
 }

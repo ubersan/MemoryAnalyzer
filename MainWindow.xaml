@@ -22,7 +22,7 @@
         <ColumnDefinition Width="*"/>
     </Grid.ColumnDefinitions>
 
-        <TreeView Grid.Column="0" ItemsSource="{Binding Root}">
+        <TreeView Grid.Column="0" ItemsSource="{Binding Root}" SelectedItemChanged="TreeView_OnSelectedItemChanged">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                     <Grid>
@@ -52,23 +52,26 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
-            <StackPanel Grid.Row="0">
-                <TextBlock Text="Biggest File"/>
-                <TextBlock Text="{Binding FileSystemWalker.Statistics.FileStatistics.BiggestNode.FileInfo.FullName}"/>
-                <TextBlock Text="{Binding FileSystemWalker.Statistics.FileStatistics.BiggestNode.Size}"/>
-            </StackPanel>
+            <TextBlock Grid.Row="0" Text="{Binding SelectedNode.Name}"/>
             
             <StackPanel Grid.Row="1">
-                <TextBlock Text="Smallest File"/>
-                <TextBlock Text="{Binding FileSystemWalker.Statistics.FileStatistics.SmallestNode.FileInfo.FullName}"/>
-                <TextBlock Text="{Binding FileSystemWalker.Statistics.FileStatistics.SmallestNode.Size}"/>
+                <TextBlock Text="Biggest File"/>
+                <TextBlock Text="{Binding SelectedNode.Statistics.FileStatistics.BiggestNode.FileInfo.FullName}"/>
+                <TextBlock Text="{Binding SelectedNode.Statistics.FileStatistics.BiggestNode.Size}"/>
             </StackPanel>
             
             <StackPanel Grid.Row="2">
+                <TextBlock Text="Smallest File"/>
+                <TextBlock Text="{Binding SelectedNode.Statistics.FileStatistics.SmallestNode.FileInfo.FullName}"/>
+                <TextBlock Text="{Binding SelectedNode.Statistics.FileStatistics.SmallestNode.Size}"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="3">
                 <TextBlock Text="Average File Size"/>
-                <TextBlock Text="{Binding FileSystemWalker.Statistics.FileStatistics.AverageSize}"/>
+                <TextBlock Text="{Binding SelectedNode.Statistics.FileStatistics.AverageSize}"/>
             </StackPanel>
         </Grid>
     </Grid>
